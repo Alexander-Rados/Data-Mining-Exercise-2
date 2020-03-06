@@ -1,0 +1,70 @@
+library(dplyr)
+library(openxlsx)
+library(ggplot2)
+library(tidyverse)
+library(survival)
+library(ggfortify)
+library(data.table)
+library(openxlsx)
+library(knitr)
+## load data and remove unneeded variables 
+brca <- read_csv('~/Documents/Data Mining/data/brca.csv')
+####First question: are some radiologists more clinically conservative than others in recalling patients, holding patient risk factors equal?
+temp = data.frame(brca)
+unique(brca$radiologist)
+R.13 = subset(temp, radiologist == "radiologist13")
+R.34 = subset(temp, radiologist == "radiologist34")
+R.66 = subset(temp, radiologist == "radiologist66")
+R.89 = subset(temp, radiologist == "radiologist89")
+R.95 = subset(temp, radiologist == "radiologist95")
+reg13 = lm(recall ~ history  ,symptoms , data=R.13)
+reg34 = lm(recall ~ history , data=R.34)
+reg66 = lm(recall ~ history , data=R.66)
+reg89 = lm(recall ~ history  , data=R.89)
+reg95 = lm(recall ~ history, data=R.95)
+#### Radiologist 13##
+logit_13= glm(recall ~ history+symptoms+age, data=R.13, family='binomial')
+phat_test_13 = predict(logit_13, R.13, type='response') 
+yhat_test_13= ifelse(phat_test_13> 0.5, 1, 0) 
+confusion_13 = table(y = R.13$recall, yhat = yhat_test_13) 
+confusion_13
+table(R.13$recall)
+29/sum(table(R.13$recall))
+#### Radiologist 34####
+logit_34 = glm(recall ~ age+history+symptoms, data=R.34, family='binomial')
+phat_test_34 = predict(logit_34, R.34, type='response') 
+yhat_test_34 = ifelse(phat_test_34 > 0.5, 1, 0) 
+confusion_34 = table(y = R.34$recall, yhat = yhat_test_34) 
+confusion_34
+table(R.34$recall)
+17/sum(table(R.34$recall))
+##### Radiologist 66 ###
+logit_66 = glm(recall ~ age+history+symptoms, data=R.66, family='binomial')
+phat_test_66 = predict(logit_66, R.66, type='response') 
+yhat_test_66 = ifelse(phat_test_66> 0.5, 1, 0) 
+confusion_out_66 = table(y = R.66$recall, yhat = yhat_test_66)
+confusion_out_66
+table(R.66$recall)
+37/sum(table(R.34$recall))
+#### radiologist 89 ###
+logit_89 = glm(recall ~ age+history+symptoms, data=R.89, family='binomial')
+phat_test_89 = predict(logit_89, R.89, type='response') 
+yhat_test_89 = ifelse(phat_test_89 > 0.5, 1, 0) 
+confusion_89= table(y = R.89$recall, yhat = yhat_test_89) 
+confusion_89
+table(R.89$recall)
+38/sum(table(R.89$recall))
+##3# radioligtst 95 ##
+logit_95 = glm(recall ~ age+history+symptoms, data=R.95, family='binomial')
+phat_test_95 = predict(logit_95, R.95, type='response') 
+yhat_test_95 = ifelse(phat_test_95 > 0.5, 1, 0) 
+confusion_95 = table(y = R.95$recall, yhat = yhat_test_95) 
+confusion_95
+table(R.95$recall)
+27/sum(table(R.95$recall))
+recall.rate= c(.146, .086, .1878, .193, .137)
+radiologist= c( "13", "34","66","89","95")
+df <- melt(data.frame(radiologist,recall.rate))
+keeps <- c("radiologist", "value")
+print=df[keeps]
+print(x)
