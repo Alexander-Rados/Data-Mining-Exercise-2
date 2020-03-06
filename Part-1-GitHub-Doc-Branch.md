@@ -45,7 +45,7 @@ conditioning. This produced a lower RMSE, around 66,000, than either a
 smaller model (just lot size, bedrooms, and bathrooms) or a larger model
 (all these variables and every interaction between them).
 
-    ## [1] 66373.41
+    ## [1] 66563.62
 
 Going off this model, we attempted to improve the RMSE through
 selections of specific interaction and adding/subtracting variables.
@@ -67,7 +67,7 @@ improved the RMSE by 300. The most impressive additional variable beyond
 the initial model was waterfront, which dropped the RMSE by about 2,000.
 This is the linear model that we decided on.
 
-    ## [1] 64301.43
+    ## [1] 64907.81
 
 # Non-Parametric Model
 
@@ -80,9 +80,9 @@ splits.
 
 ![](Part-1-GitHub-Doc-Branch_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-    ## [1] 75842.67
+    ## [1] 75736.79
 
-    ## [1] 64301.43
+    ## [1] 64907.81
 
 # Conclusion
 
