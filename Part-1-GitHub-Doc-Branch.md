@@ -84,9 +84,22 @@ splits.
 
     ## [1] 64301.43
 
+# Conclusion
+
 We found that a non-parametric model was not able to improve upon our
 linear fit. The KNN method of modeling resulted in a consistently higher
 RMSE, thus showing the use of a linear model compared to a
 non-parametric fit in predicting house prices for taxation purposes.
 
-# Conclusion
+Therefore, it would be my recommendation that the local taxing authority
+uses the linear model that encompasses age, percentage of college
+graduates in the neighborhood, size of the lot (in acres), number of
+bedrooms, bathrooms, and extra rooms, living area of the house (in
+square feet), number of fireplaces, type of heating system, type of fuel
+system, whether there was central air conditioning, along with
+interactions between bedrooms and bathrooms, bathrooms and extra rooms,
+bedrooms and extra rooms, and, finally, if there was new construction
+and if the property was on the waterfront. This model produced the
+lowest out-of-sample root mean-squared error, giving it the most
+accurate option for predicting future house price for generating an
+accurate tax for.
