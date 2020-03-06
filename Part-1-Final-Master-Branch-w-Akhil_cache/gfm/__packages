@@ -19,3 +19,9 @@ iterators
 doMC
 class
 FNN
+openxlsx
+survival
+ggfortify
+data.table
+knitr
+scales
